@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>SingleCloud</title>
+        <link rel="stylesheet" href="css/normalize.css" type="text/css" media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href="css/skeleton.css" type="text/css" media="screen" title="no title" charset="utf-8">
+        <style type="text/css" media="screen">
+            body {
+                font-family: Helvetica, Arial, sans-serif;
+            }
+        </style>
+    </head>
+    <body id="index">
+        <div class="container">
+            <div class="row">
+                <h1>SingleCloud</h1>
+                <p>SingleCloud plays a SoundCloud song you choose to play and nothing else, no related/recommended songs, just the song you like.</p>
+            </div>
+
+            <div class="row">
+                <p>
+                    <input type="text" name="song_url" id="song_url" size="64" value="https://soundcloud.com/erasedtapes/nils-frahm-says">
+                    <button id="find" class="button-primary">Find & Play</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div id="embed"></div>
+        </div>
+
+        <script src="js/jquery-1.11.2.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="https://connect.soundcloud.com/sdk.js"></script>
+        <script>
+            SC.initialize({
+            client_id: "40286ff4d20dba7d7755e3d8bab929e7",
+            redirect_uri: "http://singlecloud.toughtype.com/callback",
+            });
+
+            // TODO: add validation & error handling
+            $("#find").click(function(e) {
+                var soundcloud_url = $("#song_url").val();
+
+                SC.oEmbed(
+                    soundcloud_url,
+                    {
+                        auto_play: true,
+                        hide_related: true,
+                        show_comments: false,
+                        show_user: false,
+                        show_reposts: false,
+                        visual: false
+                    },
+                    function(oembed) {
+                        $("#embed").html(oembed.html);
+
+                });
+                
+            });
+
+            // TODO: for search
+            // SC.get("/tracks", {q: "Nils Frahm"}, function(tracks) {
+            //     console.log(tracks);
+            // });
+
+            // SC.oEmbed(
+            //     "http://soundcloud.com/forss/flickermood",
+            //     {
+            //         auto_play: true,
+            //         hide_related: true,
+            //         show_comments: false,
+            //         show_user: false,
+            //         show_reposts: false,
+            //         visual: false
+            //     },
+            //     function(oembed) {
+            //         console.log("oEmbed response: ", oembed);
+            //         $("#embed").html(oembed.html);
+            //
+            // });
+
+        </script>
+
+        <!-- TODO: for use later; script to control the soundcloud player widget -->
+        <!-- <script src="https://w.soundcloud.com/player/api.js" type="text/javascript" charset="utf-8"></script> -->
+    </body>
+</html>
