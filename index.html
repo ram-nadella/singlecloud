@@ -39,12 +39,10 @@
             redirect_uri: "http://singlecloud.toughtype.com/callback",
             });
 
-            // TODO: add validation & error handling
-            $("#find").click(function(e) {
-                var soundcloud_url = $("#song_url").val();
+            var embedSongAndPlay = function(songUrl) {
 
                 SC.oEmbed(
-                    soundcloud_url,
+                    songUrl,
                     {
                         auto_play: true,
                         hide_related: true,
@@ -57,7 +55,25 @@
                         $("#embed").html(oembed.html);
 
                 });
-                
+            }
+
+            // TODO: add validation & error handling
+            $("#find").click(function(e) {
+                var songUrl = $("#song_url").val();
+                embedSongAndPlay(songUrl);
+            });
+
+            $("#song_url").keypress(function(e) {
+                console.log("event");
+                if (e.which == 13) {
+                    console.log("event");
+                    var songUrl = $("#song_url").val();
+                    embedSongAndPlay(songUrl);
+                }
+            });
+
+            $("#song_url").focus(function(e) {
+                $("#song_url").select();
             });
 
             // TODO: for search
