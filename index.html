@@ -32,11 +32,11 @@
         </div>
 
         <script src="js/jquery-1.11.2.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="https://connect.soundcloud.com/sdk.js"></script>
+        <script src="https://connect.soundcloud.com/sdk-2.0.0.js"></script>
         <script>
             SC.initialize({
-            client_id: "40286ff4d20dba7d7755e3d8bab929e7",
-            redirect_uri: "http://singlecloud.toughtype.com/callback",
+                client_id: "40286ff4d20dba7d7755e3d8bab929e7",
+                redirect_uri: "http://singlecloud.toughtype.com/callback",
             });
 
             var embedSongAndPlay = function(songUrl) {
@@ -55,7 +55,7 @@
                         $("#embed").html(oembed.html);
 
                 });
-            }
+            };
 
             // TODO: add validation & error handling
             $("#find").click(function(e) {
