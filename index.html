@@ -4,8 +4,8 @@
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>SingleCloud</title>
-        <link rel="stylesheet" href="css/normalize.css" type="text/css" media="screen" title="no title" charset="utf-8">
-        <link rel="stylesheet" href="css/skeleton.css" type="text/css" media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href="/css/normalize.css" type="text/css" media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href="/css/skeleton.css" type="text/css" media="screen" title="no title" charset="utf-8">
         <style type="text/css" media="screen">
             body {
                 font-family: Helvetica, Arial, sans-serif;
@@ -31,73 +31,11 @@
             <div id="embed"></div>
         </div>
 
-        <script src="js/jquery-1.11.2.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/jquery-1.11.2.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="https://connect.soundcloud.com/sdk-2.0.0.js"></script>
-        <script>
-            SC.initialize({
-                client_id: "40286ff4d20dba7d7755e3d8bab929e7",
-                redirect_uri: "http://singlecloud.toughtype.com/callback",
-            });
-
-            var embedSongAndPlay = function(songUrl) {
-
-                SC.oEmbed(
-                    songUrl,
-                    {
-                        auto_play: true,
-                        hide_related: true,
-                        show_comments: false,
-                        show_user: false,
-                        show_reposts: false,
-                        visual: false
-                    },
-                    function(oembed) {
-                        $("#embed").html(oembed.html);
-
-                });
-            };
-
-            // TODO: add validation & error handling
-            $("#find").click(function(e) {
-                var songUrl = $("#song_url").val();
-                embedSongAndPlay(songUrl);
-            });
-
-            $("#song_url").keypress(function(e) {
-                console.log("event");
-                if (e.which == 13) {
-                    console.log("event");
-                    var songUrl = $("#song_url").val();
-                    embedSongAndPlay(songUrl);
-                }
-            });
-
-            $("#song_url").focus(function(e) {
-                $("#song_url").select();
-            });
-
-            // TODO: for search
-            // SC.get("/tracks", {q: "Nils Frahm"}, function(tracks) {
-            //     console.log(tracks);
-            // });
-
-            // SC.oEmbed(
-            //     "http://soundcloud.com/forss/flickermood",
-            //     {
-            //         auto_play: true,
-            //         hide_related: true,
-            //         show_comments: false,
-            //         show_user: false,
-            //         show_reposts: false,
-            //         visual: false
-            //     },
-            //     function(oembed) {
-            //         console.log("oEmbed response: ", oembed);
-            //         $("#embed").html(oembed.html);
-            //
-            // });
-
-        </script>
+        <script src="/js/lodash.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/backbone-min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/singlecloud.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- TODO: for use later; script to control the soundcloud player widget -->
         <!-- <script src="https://w.soundcloud.com/player/api.js" type="text/javascript" charset="utf-8"></script> -->
