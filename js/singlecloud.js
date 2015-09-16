@@ -8,10 +8,10 @@
 
 		var SingleCloudRouter = Backbone.Router.extend({
 			routes: {
-				'tracks/:trackId': "playTrack"
+				'tracks/:trackId/(:trackText)': "playTrack"
 			},
 
-			playTrack: function(trackId) {
+			playTrack: function(trackId, trackText) {
 				SC.get('/tracks/' + trackId, function(track) {
 					var trackUrl = track.permalink_url;
 					embedSongAndPlay(trackUrl);
@@ -41,10 +41,16 @@
 
 			SC.get('/resolve', { url: songUrl }, function(track) {
 				var trackId = track.id;
-				console.log(track);
-				router.navigate("tracks/" + trackId);
+				var url = generateUrlFromTrackInfo(track);
+				router.navigate(url);
 			});
 
+		};
+
+		var generateUrlFromTrackInfo = function(track) {
+			var trackId = track.id;
+			var trackText = track.permalink;
+			return ["tracks", trackId, trackText].join("/");
 		};
 
 		// TODO: add validation & error handling
@@ -54,9 +60,7 @@
 		});
 
 		$("#song_url").keypress(function(e) {
-		    console.log("event");
 		    if (e.which == 13) {
-		        console.log("event");
 		        var songUrl = $("#song_url").val();
 		        embedSongAndPlay(songUrl);
 		    }
