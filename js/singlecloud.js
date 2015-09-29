@@ -21,7 +21,7 @@
 
 		var router = new SingleCloudRouter();
 
-		Backbone.history.start({pushState: true})
+		Backbone.history.start({pushState: false});
 
 		var embedSongAndPlay = function(songUrl) {
 
