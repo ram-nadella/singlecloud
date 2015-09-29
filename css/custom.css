@@ -1,0 +1,20 @@
+body {
+    padding-top: 5%;
+}
+
+.button {
+  border-radius: 100px;
+}
+
+.button.button-primary {
+  background-color: #FB2F05;
+  border-color: #FB2F05;
+}
+
+a#title {
+    text-decoration: none;
+}
+
+a#title:hover {
+    border-bottom: 1px solid;
+}
